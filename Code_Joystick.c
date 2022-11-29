@@ -23,7 +23,7 @@ void ILI9341_DrawSquare(int16_t x0, int16_t y0, int16_t taille, uint16_t color){
 Fonction test qui permet de faire bouger un caree de gauche a droite sans s'arrêter
 @breif 
 */
-static void move(){
+static void move_test(){
 	static int xJoueur=120;
 	static int yJoueur=20;
 	bool_e allerDroite=FALSE;
