@@ -1,5 +1,5 @@
 
-*/
+/*
 permet de créée un background représentant l'espace (attention pa fini)
 @brief
 */
