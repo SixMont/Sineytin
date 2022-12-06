@@ -52,3 +52,34 @@ static void move_test(){
 	}
 
 }
+
+/*Fonction qui permet de faire bouger le carré corectement avec le joystick
+@brief
+*/
+void JOYSTICK_move_x(void){
+	while(1){
+		while (JOYSTICK_x_getValue()>2200){
+			JOYSTICK_move_x_GAUCHE();
+		}
+		while(JOYSTICK_x_getValue()<1520){
+			JOYSTICK__move_x_DROITE();
+		}
+	}
+}
+
+
+void JOYSTICK__move_x_DROITE(void){
+	if (xJoueur>20){
+		ILI9341_DrawSquare(xJoueur,yJoueur,5,ILI9341_COLOR_BLACK);
+		ILI9341_DrawSquare(xJoueur-5,yJoueur,5,ILI9341_COLOR_BLUE);
+		xJoueur-=5;
+	}
+}
+
+void JOYSTICK_move_x_GAUCHE(void){
+	if (xJoueur<220){
+		ILI9341_DrawSquare(xJoueur,yJoueur,5,ILI9341_COLOR_BLACK);
+		ILI9341_DrawSquare(xJoueur+5,yJoueur,5,ILI9341_COLOR_BLUE);
+		xJoueur+=5;
+	}
+}
