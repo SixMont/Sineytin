@@ -6,13 +6,18 @@
   * @brief   Default main function.
   ******************************************************************************
 */
-
 #include "stm32f1xx_hal.h"
 #include "stm32f1_uart.h"
 #include "stm32f1_sys.h"
 #include "stm32f1_gpio.h"
 #include "macro_types.h"
 #include "systick.h"
+
+
+static volatile uint16_t positionX;
+
+
+
 
 void writeBUZZER(bool_e b)
 {
@@ -39,7 +44,56 @@ void process_ms(void)
 
 //Fonctions Controle Joystick
 
-//Fonction
+void JOYSTICK_x_init(void){
+	//BSP_GPIO_PinCfg(JOYSTICK_x_PORT, JOYSTICK_x_PIN, GPIO_MODE_INPUT, GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH);
+	ADC_init();
+}
+
+void JOYSTICK_y_init(void){
+	//BSP_GPIO_PinCfg(JOYSTICK_y_PORT, JOYSTICK_y_PIN, GPIO_MODE_INPUT, GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH);
+	ADC_init();
+}
+
+uint16_t JOYSTICK_x_getValue(){
+	positionX=ADC_getValue(ADC_3);
+	return positionX;
+}
+
+//Fonctions Menu
+
+//Fonctions Background
+
+void FOND_Espace(bool_e b){
+	int x=0;
+	int y=340;
+	ILI9341_Fill(ILI9341_COLOR_BLACK);
+	if(b)	
+	{
+		while (y>20){
+			x=rand();
+			ILI9341_DrawPixel(x,y,ILI9341_COLOR_WHITE);
+			y--;
+		}
+	}
+}
+
+//Fonctions Detection
+
+//Fonctions	Buzzer
+
+void buzzer(bool_e b)
+{
+	if(b)
+	{
+		writeBUZZER(1);
+
+		HAL_Delay(500);			//test buzzer mais ça marche pas
+
+		writeBUZZER(0);
+	}
+}
+
+//Fonctions
 
 int main(void)
 {
@@ -64,18 +118,9 @@ int main(void)
 	//On ajoute la fonction process_ms � la liste des fonctions appel�es automatiquement chaque ms par la routine d'interruption du p�riph�rique SYSTICK
 	Systick_add_callback_function(&process_ms);
 
-//	writeBUZZER(1);
-
-//	HAL_Delay(500);			//test buzzer mais ça marche pas
-
-//	writeBUZZER(0);
-	
-	
-	
 
 	while(1)	//boucle de t�che de fond
 	{
-
 		if(!t)
 		{
 			t = 200;
@@ -103,7 +148,7 @@ void state_machine(void)
 		state = MENU;
 		break;
 		case JOUEUR1:
-						// 1 seul joueur 
+						// 1 seul joueur
 		state = PERD;
 		state = GAGNE;
 		break;
@@ -126,3 +171,5 @@ void state_machine(void)
 		default:
 	break;
 	}
+}
+
