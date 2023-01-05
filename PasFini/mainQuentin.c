@@ -44,6 +44,7 @@ void Ecran_titre_jeu(void){
 	FOND_Espace();
 	ILI9341_Puts(55,100, "SINEYTIN", &Font_16x26, ILI9341_COLOR_WHITE,ILI9341_COLOR_BLACK);
 	ILI9341_Puts(95,200, "Start", &Font_11x18, ILI9341_COLOR_WHITE,ILI9341_COLOR_BLACK);
+	ILI9341_Puts(95,280, "leave", &Font_11x18, ILI9341_COLOR_WHITE,ILI9341_COLOR_BLACK);
 }
 
 void Ecran_Selection(void){
