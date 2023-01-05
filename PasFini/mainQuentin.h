@@ -72,8 +72,8 @@
 	#define USE_AN8			0	//Broche correspondante : PB0
 	#define USE_AN9			0	//Broche correspondante : PB1
 	#define USE_AN10		0	//Broche correspondante : PC0	//Sur la Bluepill, cette broche n'est pas c�bl�e !
-	#define USE_AN11		0	//Broche correspondante : PC1	//Sur la Bluepill, cette broche n'est pas c�bl�e !
-	#define USE_AN12		0	//Broche correspondante : PC2	//Sur la Bluepill, cette broche n'est pas c�bl�e !
+	#define USE_AN11		1	//Broche correspondante : PC1	//Sur la Bluepill, cette broche n'est pas c�bl�e !
+	#define USE_AN12		1	//Broche correspondante : PC2	//Sur la Bluepill, cette broche n'est pas c�bl�e !
 	#define USE_AN13		0	//Broche correspondante : PC3	//Sur la Bluepill, cette broche n'est pas c�bl�e !
 	#define USE_AN14		0	//Broche correspondante : PC4	//Sur la Bluepill, cette broche n'est pas c�bl�e !
 	#define USE_AN15		0	//Broche correspondante : PC5	//Sur la Bluepill, cette broche n'est pas c�bl�e !
@@ -89,6 +89,12 @@
 			#define JOYSTICK_y_PORT			GPIOA
 			#define JOYSTICK_y_PIN			GPIO_PIN_1
 
+			#define JOYSTICK2_x_PORT        GPIOA
+            #define JOYSTICK2_x_PIN		GPIO_PIN_3
+
+			#define JOYSTICK2_y_PORT		GPIOA
+			#define JOYSTICK2_y_PIN		GPIO_PIN_4
+
 		#endif
 	#endif
 
@@ -97,9 +103,10 @@
 	#if USE_SCREEN_TFT_ILI9341
 		#define USE_XPT2046			1	//Tactile
 
-		#define USE_FONT11x18		0
+		#define USE_FONT11x18		1
 		#define USE_FONT7x10		1
-		#define USE_FONT16x26		0
+		#define USE_FONT16x26		1
+
 
 		#if BLUEPILL					//D�finition des broches CS, WRX et RST pour la BLUEPILL
 			#define ILI9341_CS_PORT       GPIOB
