@@ -1,3 +1,10 @@
+/*
+ * config.h
+ *
+ *  Created on: 31 mars 2016
+ *      Author: Nirgal
+ */
+
 #ifndef CONFIG_H_
 #define CONFIG_H_
 #include "stm32f1xx_hal.h"
@@ -27,7 +34,9 @@
 	#define LED_GREEN_GPIO		GPIOC
 	#define LED_GREEN_PIN		GPIO_PIN_13
 	#define BLUE_BUTTON_GPIO	GPIOA
-	#define BLUE_BUTTON_PIN 	GPIO_PIN_15		//Pas de bouton sur la bluepill, choisissez le port souhait� si vous en reliez un.
+	#define BLUE_BUTTON_PIN 	GPIO_PIN_15//Pas de bouton sur la bluepill, choisissez le port souhait� si vous en reliez un.
+	#define BUTTON_U_GPIO		GPIOA
+	#define	BUTTON_U_PIN		GPIO_PIN_10
 #endif
 
 //Choisir les broches pour l'UART1, parmi ces deux possibilit�s :
@@ -72,8 +81,8 @@
 	#define USE_AN8			0	//Broche correspondante : PB0
 	#define USE_AN9			0	//Broche correspondante : PB1
 	#define USE_AN10		0	//Broche correspondante : PC0	//Sur la Bluepill, cette broche n'est pas c�bl�e !
-	#define USE_AN11		1	//Broche correspondante : PC1	//Sur la Bluepill, cette broche n'est pas c�bl�e !
-	#define USE_AN12		1	//Broche correspondante : PC2	//Sur la Bluepill, cette broche n'est pas c�bl�e !
+	#define USE_AN11		0	//Broche correspondante : PC1	//Sur la Bluepill, cette broche n'est pas c�bl�e !
+	#define USE_AN12		0	//Broche correspondante : PC2	//Sur la Bluepill, cette broche n'est pas c�bl�e !
 	#define USE_AN13		0	//Broche correspondante : PC3	//Sur la Bluepill, cette broche n'est pas c�bl�e !
 	#define USE_AN14		0	//Broche correspondante : PC4	//Sur la Bluepill, cette broche n'est pas c�bl�e !
 	#define USE_AN15		0	//Broche correspondante : PC5	//Sur la Bluepill, cette broche n'est pas c�bl�e !
@@ -84,16 +93,16 @@
 	#if USE_JOYSTICK
 		#if BLUEPILL
 			#define JOYSTICK_x_PORT			GPIOA
-			#define JOYSTICK_x_PIN			GPIO_PIN_2
+			#define JOYSTICK_x_PIN			GPIO_PIN_3
 
 			#define JOYSTICK_y_PORT			GPIOA
-			#define JOYSTICK_y_PIN			GPIO_PIN_1
+			#define JOYSTICK_y_PIN			GPIO_PIN_2
 
 			#define JOYSTICK2_x_PORT        GPIOA
-            #define JOYSTICK2_x_PIN		GPIO_PIN_3
+            #define JOYSTICK2_x_PIN			GPIO_PIN_1
 
 			#define JOYSTICK2_y_PORT		GPIOA
-			#define JOYSTICK2_y_PIN		GPIO_PIN_4
+			#define JOYSTICK2_y_PIN			GPIO_PIN_2
 
 		#endif
 	#endif
