@@ -5,6 +5,23 @@ static bool_e tir = FALSE;
 static uint16_t y = 20;
 
 
+
+
+
+void shot(uint16_t xc, uint16_t y){
+
+
+
+
+
+	ILI9341_DrawFilledCircle(xc, y-4,r, ILI9341_COLOR_WHITE);
+	//HAL_Delay(5);
+	ILI9341_DrawFilledCircle(xc, y+2,r, ILI9341_COLOR_RED);
+
+}
+
+
+
 bool_e collision(uint16_t xc,uint16_t y,uint16_t r){
 
 
