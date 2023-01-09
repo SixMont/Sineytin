@@ -1,3 +1,11 @@
+/**
+  ******************************************************************************
+  * @file    main.c
+  * @author  Nirgal
+  * @date    03-July-2019
+  * @brief   Default main function.
+  ******************************************************************************
+*/
 #include "stm32f1xx_hal.h"
 #include "stm32f1_uart.h"
 #include "stm32f1_sys.h"
@@ -10,13 +18,8 @@
 
 static int xJoueur=120;
 static int yJoueur=20;
-
-void writeLED(bool_e b)
-{
-	HAL_GPIO_WritePin(LED_GREEN_GPIO, LED_GREEN_PIN, b);
-}
-
 static volatile uint32_t t = 0;
+
 void process_ms(void)
 {
 	if(t)
@@ -62,7 +65,11 @@ void JOYSTICK_move_x_GAUCHE(void){
 	}
 }
 
-//ecran defaite
+/*
+ * @Brief affiche l'ecran de defaite
+ * @param  Non
+ * @retval Non
+*/
 
 void Ecran_defaite(void){
 	FOND_Espace();
@@ -80,7 +87,12 @@ void Ecran_defaite(void){
 			}
 		}
 }
-//ecran victoire
+
+/*
+ * @Brief affiche l'ecran de victoire
+ * @param  Non
+ * @retval Non
+*/
 
 void Ecran_victoire(void){
 	FOND_Espace();
@@ -98,7 +110,12 @@ void Ecran_victoire(void){
 			}
 		}
 }
-//ecran titre
+
+/*
+ * @Brief affiche l'ecran titre
+ * @param  Non
+ * @retval entier 1 => leave -1 => Start
+*/
 
 int Ecran_titre_jeu(void){
 	FOND_Espace();
@@ -138,7 +155,11 @@ int Ecran_titre_jeu(void){
 		return sortir;
 }
 
-//Fonctions Menu
+/*
+ * @Brief affiche l'ecran de selection de joueurs
+ * @param  Non
+ * @retval entier 1 => 2 joueurs -1 => solo
+*/
 
 int Ecran_Selection(void){
 	FOND_Espace();
@@ -175,34 +196,41 @@ int Ecran_Selection(void){
 	return sortir;
 }
 
-//Fonctions Background
+/*
+ * @Brief affiche le fond d'ecran
+ * @param  Non
+ * @retval Non
+*/
 
-void FOND_Espace(bool_e b){
+void FOND_Espace(void){
 	int x=0;
 	int y=340;
 	ILI9341_Fill(ILI9341_COLOR_BLACK);
-	if(b)
-	{
-		while (y>20){
-			x=rand();
-			ILI9341_DrawPixel(x,y,ILI9341_COLOR_WHITE);
-			y--;
-		}
+	while (y>20){
+		x=rand();
+		ILI9341_DrawPixel(x,y,ILI9341_COLOR_WHITE);
+		y--;
+		
 	}
 }
 
-//Fonctions Detection
+/*
+ * @Brief affiche le fond d'ecran
+ * @param  xc : coordonnée x centre boule y : coordonnée y centre boule
+ * @retval TRUE : si collision FALSE : si pas collision
+*/
 
-bool_e collision(uint16_t xc,uint16_t y,uint16_t r){
+bool_e collision(uint16_t x,uint16_t y){
 
-
+	int r=4;
+	
 	/**
 	 * détecte si la distance entre centre du cercle et centre du carré est inférieure
 	 * au rayon du cercle et la moitié du côté du carré
 	 */
 
-	uint32_t distance = sqrt(square((200-xc))+square((300-y)));		//à modifier
-	if (distance<=(15)){
+	uint32_t distance = sqrt(square((200-x))+square((300-y)));		//à modifier
+	if (distance<=(r+4)){
 
 
 		return TRUE;
@@ -307,6 +335,7 @@ void state_machine(void)
 			state = JOUEUR2;
 				}
 		break;
+		
 		case JOUEUR1:
 						// 1 seul joueur
 		//j1 = Mode_1_joueurs();
@@ -316,6 +345,7 @@ void state_machine(void)
 		state = DEFAITE;
 
 		break;
+		
 		case JOUEUR2:
 						// 2 joueurs
 
@@ -327,18 +357,24 @@ void state_machine(void)
 		state = DEFAITE;
 
 		break;
+		
 		case DEFAITE:
 						//perd
 		Ecran_defaite();
 		state = MENU;
 		break;
+		
 		case VICTOIRE:
 						//gagne
 		Ecran_victoire();
 		state = MENU;
 		break;
+		
+		case OFF:
+		ILI9341_DisplayOff();
+		break;
+		
 		default:
 	break;
 	}
 }
-
