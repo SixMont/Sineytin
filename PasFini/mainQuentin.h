@@ -1,10 +1,3 @@
-/*
- * config.h
- *
- *  Created on: 31 mars 2016
- *      Author: Nirgal
- */
-
 #ifndef CONFIG_H_
 #define CONFIG_H_
 #include "stm32f1xx_hal.h"
@@ -35,8 +28,10 @@
 	#define LED_GREEN_PIN		GPIO_PIN_13
 	#define BLUE_BUTTON_GPIO	GPIOA
 	#define BLUE_BUTTON_PIN 	GPIO_PIN_15//Pas de bouton sur la bluepill, choisissez le port souhait� si vous en reliez un.
-	#define BUTTON_U_GPIO		GPIOA
-	#define	BUTTON_U_PIN		GPIO_PIN_10
+	#define BUTTON1_GPIO		GPIOA
+	#define	BUTTON1_PIN			GPIO_PIN_10
+	#define BUTTON2_GPIO		GPIOA
+	#define BUTTON2_PIN			GPIO_PIN_9
 #endif
 
 //Choisir les broches pour l'UART1, parmi ces deux possibilit�s :
