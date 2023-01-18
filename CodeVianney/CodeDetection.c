@@ -95,6 +95,25 @@ void AvanceEnnemiGauche(uint16_t xEnnemi,uint16_t yEnnemi){
 
 }
 
+void JOYSTICK__move_x_DROITE(void){
+
+	if (xJoueur>20){
+		ILI9341_DrawFilledRectangle(xJoueur, yJoueur, xJoueur+10, yJoueur+10, ILI9341_COLOR_BLACK);
+		ILI9341_DrawFilledRectangle(xJoueur-5, yJoueur, xJoueur+5, yJoueur+10, ILI9341_COLOR_YELLOW);
+		xJoueur-=5;
+	}
+}
+
+void JOYSTICK_move_x_GAUCHE(void){
+
+	if (xJoueur<220){
+		ILI9341_DrawFilledRectangle(xJoueur, yJoueur, xJoueur+10, yJoueur+10, ILI9341_COLOR_BLACK);
+		ILI9341_DrawFilledRectangle(xJoueur+5, yJoueur, xJoueur+15, yJoueur+10, ILI9341_COLOR_YELLOW);
+		xJoueur+=5;
+	}
+}
+
+
 
 
 
