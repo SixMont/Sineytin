@@ -508,12 +508,12 @@ bool_e collision2(uint32_t xc,uint32_t y,uint32_t r){
 
 void shot(uint16_t xc, uint16_t y){
 	ILI9341_DrawFilledCircle(xc, y+6,r, ILI9341_COLOR_BLACK);
-	ILI9341_DrawFilledCircle(xc, y-4,r, ILI9341_COLOR_RED);
+	ILI9341_DrawFilledCircle(xc, y-6,r, ILI9341_COLOR_RED);
 }
 
 void shot2(uint16_t xc, uint16_t y){
 	ILI9341_DrawFilledCircle(xc, y-6,r, ILI9341_COLOR_BLACK);
-	ILI9341_DrawFilledCircle(xc, y+4,r, ILI9341_COLOR_RED);
+	ILI9341_DrawFilledCircle(xc, y+6,r, ILI9341_COLOR_RED);
 }
 
 /*
@@ -545,7 +545,7 @@ bool_e Mode_2_Joueurs(void){
 			shot(xc,y);
 			if(y<=20){
 				tir=FALSE;
-				ILI9341_DrawFilledCircle(xc, y+2,r+2, ILI9341_COLOR_BLACK);
+				ILI9341_DrawFilledCircle(xc, y,r, ILI9341_COLOR_BLACK);
 				y=yJoueur;
 				}
 				if (collision(xc,y,10)){
@@ -567,7 +567,7 @@ bool_e Mode_2_Joueurs(void){
 					shot2(xc2,y2);
 					if(y2>=310){
 						tir2=FALSE;
-						ILI9341_DrawFilledCircle(xc2, y2+2,r+2, ILI9341_COLOR_BLACK);
+						ILI9341_DrawFilledCircle(xc2, y2,r, ILI9341_COLOR_BLACK);
 						y2=yJoueur2;
 					}
 					if (collision2(xc2,y2,10)){
