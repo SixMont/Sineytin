@@ -15,17 +15,17 @@
 #define square(a) (a)*(a)
 
 static uint16_t disparition = 0;
-static uint8_t score = 0;
 static uint16_t vie = 0;
 static volatile uint32_t t = 0;
-static int xJoueur=120;
-static int yJoueur=300;
-static int xJoueur2=120;
-static int yJoueur2=20;
-uint16_t r=4;
+static uint16_t xJoueur=120;
+static uint16_t yJoueur=300;
+static uint16_t xJoueur2=120;
+static uint16_t yJoueur2=20;
+int16_t r=4;
 static bool_e tir = FALSE;
 static bool_e tir2 = FALSE;
-static uint16_t y = 20;
+static int16_t y = 20;
+static uint16_t vitesse = 6;
 
 void JOYSTICK_move_x(void){
 	if (JOYSTICK_x_getValue()>2200){
@@ -38,22 +38,29 @@ void JOYSTICK_move_x(void){
 
 
 void JOYSTICK_move_x_DROITE(void){
+
+	uint16_t l = 5;
+	uint16_t l2 = 6;
+	uint16_t l3 = 4;
 	if (xJoueur>20){
 		//ILI9341_DrawSquare(xJoueur,yJoueur,5,ILI9341_COLOR_BLACK);
 		//ILI9341_DrawSquare(xJoueur-5,yJoueur,5,ILI9341_COLOR_BLUE);
-		ILI9341_DrawFilledRectangle(xJoueur-(10/2), yJoueur-(10/2), xJoueur+(10/2), yJoueur+(10/2), ILI9341_COLOR_BLACK);
-		ILI9341_DrawFilledRectangle(xJoueur-(10/2)-1, yJoueur-(10/2), xJoueur+(10/2)-1, yJoueur+(10/2), ILI9341_COLOR_BLUE);
-		xJoueur-=1;
+		ILI9341_DrawFilledRectangle(xJoueur-l, yJoueur-l, xJoueur+l, yJoueur+l, ILI9341_COLOR_BLACK);
+		ILI9341_DrawFilledRectangle(xJoueur-l2, yJoueur-l, xJoueur+l3, yJoueur+l, ILI9341_COLOR_RED);
+		xJoueur--;
 	}
 }
 
 void JOYSTICK_move_x_GAUCHE(void){
 	if (xJoueur<220){
+		uint16_t l = 5;
+		uint16_t l2 = 4;
+		uint16_t l3 = 6;
 		//ILI9341_DrawSquare(xJoueur,yJoueur,5,ILI9341_COLOR_BLACK);
 		//ILI9341_DrawSquare(xJoueur+5,yJoueur,5,ILI9341_COLOR_BLUE);
-		ILI9341_DrawFilledRectangle(xJoueur-(10/2), yJoueur-(10/2), xJoueur+(10/2), yJoueur+(10/2), ILI9341_COLOR_BLACK);
-		ILI9341_DrawFilledRectangle(xJoueur-(10/2)+1, yJoueur-(10/2), xJoueur+(10/2)+1, yJoueur+(10/2), ILI9341_COLOR_BLUE);
-		xJoueur+=1;
+		ILI9341_DrawFilledRectangle(xJoueur-l, yJoueur-l, xJoueur+l, yJoueur+l, ILI9341_COLOR_BLACK);
+		ILI9341_DrawFilledRectangle(xJoueur-l2, yJoueur-l, xJoueur+l3, yJoueur+l, ILI9341_COLOR_RED);
+		xJoueur++;
 	}
 }
 
@@ -69,22 +76,30 @@ void JOYSTICK2_move_x(void){
 
 
 void JOYSTICK2_move_x_DROITE(void){
+
+	uint16_t l = 5;
+	uint16_t l2 = 6;
+	uint16_t l3 = 4;
 	if (xJoueur2>20){
 		//ILI9341_DrawSquare(xJoueur2,yJoueur2,5,ILI9341_COLOR_BLACK);
 		//ILI9341_DrawSquare(xJoueur2-5,yJoueur2,5,ILI9341_COLOR_RED);
-		ILI9341_DrawFilledRectangle(xJoueur2-(10/2), yJoueur2-(10/2), xJoueur2+(10/2), yJoueur2+(10/2), ILI9341_COLOR_BLACK);
-		ILI9341_DrawFilledRectangle(xJoueur2-(10/2)-1, yJoueur2-(10/2), xJoueur2+(10/2)-1, yJoueur2+(10/2), ILI9341_COLOR_RED);
-		xJoueur2-=1;
+		ILI9341_DrawFilledRectangle(xJoueur2-l, yJoueur2-l, xJoueur2+l, yJoueur2+l, ILI9341_COLOR_BLACK);
+		ILI9341_DrawFilledRectangle(xJoueur2-l2, yJoueur2-l, xJoueur2+l3, yJoueur2+l, ILI9341_COLOR_BLUE);
+		xJoueur2--;
 	}
 }
 
 void JOYSTICK2_move_x_GAUCHE(void){
 	if (xJoueur2<220){
+
+		uint16_t l = 5;
+		uint16_t l2 = 4;
+		uint16_t l3 = 6;
 		//ILI9341_DrawSquare(xJoueur2,yJoueur2,5,ILI9341_COLOR_BLACK);
 		//ILI9341_DrawSquare(xJoueur2+5,yJoueur2,5,ILI9341_COLOR_RED);
-		ILI9341_DrawFilledRectangle(xJoueur2-(10/2), yJoueur2-(10/2), xJoueur2+(10/2), yJoueur2+(10/2), ILI9341_COLOR_BLACK);
-		ILI9341_DrawFilledRectangle(xJoueur2-(10/2)+1, yJoueur2-(10/2), xJoueur2+(10/2)+1, yJoueur2+(10/2), ILI9341_COLOR_RED);
-		xJoueur2+=1;
+		ILI9341_DrawFilledRectangle(xJoueur2-l, yJoueur2-l, xJoueur2+l, yJoueur2+l, ILI9341_COLOR_BLACK);
+		ILI9341_DrawFilledRectangle(xJoueur2-l2, yJoueur2-l, xJoueur2+l3, yJoueur2+l, ILI9341_COLOR_BLUE);
+		xJoueur2++;
 	}
 }
 
@@ -157,20 +172,20 @@ static void process_ms(void){
 void AvanceEnnemiBas(uint16_t xEnnemi,uint16_t yEnnemi){
 
 	ILI9341_DrawFilledRectangle((uint16_t)(xEnnemi-5),(uint16_t)(yEnnemi-4),(uint16_t)(xEnnemi+3),(uint16_t)(yEnnemi+4),ILI9341_COLOR_BLACK);
-	ILI9341_DrawFilledRectangle((uint16_t)(xEnnemi-5),(uint16_t)(yEnnemi-5),(uint16_t)(xEnnemi+3),(uint16_t)(yEnnemi+3),ILI9341_COLOR_BLUE);
+	ILI9341_DrawFilledRectangle((uint16_t)(xEnnemi-5),(uint16_t)(yEnnemi-5),(uint16_t)(xEnnemi+3),(uint16_t)(yEnnemi+3),ILI9341_COLOR_GREEN);
 	}
 
 void AvanceEnnemiDroite(uint16_t xEnnemi,uint16_t yEnnemi){
 
 	ILI9341_DrawFilledRectangle((uint16_t)(xEnnemi-4),(uint16_t)(yEnnemi-4),(uint16_t)(xEnnemi+4),(uint16_t)(yEnnemi+4),ILI9341_COLOR_BLACK);
-	ILI9341_DrawFilledRectangle((uint16_t)(xEnnemi-5),(uint16_t)(yEnnemi-5),(uint16_t)(xEnnemi+3),(uint16_t)(yEnnemi+3),ILI9341_COLOR_BLUE);
+	ILI9341_DrawFilledRectangle((uint16_t)(xEnnemi-5),(uint16_t)(yEnnemi-5),(uint16_t)(xEnnemi+3),(uint16_t)(yEnnemi+3),ILI9341_COLOR_GREEN);
 }
 
 
 void AvanceEnnemiGauche(uint16_t xEnnemi,uint16_t yEnnemi){
 
 	ILI9341_DrawFilledRectangle((uint16_t)(xEnnemi-6),(uint16_t)(yEnnemi-4),(uint16_t)(xEnnemi+2),(uint16_t)(yEnnemi+4),ILI9341_COLOR_BLACK);
-	ILI9341_DrawFilledRectangle((uint16_t)(xEnnemi-5),(uint16_t)(yEnnemi-5),(uint16_t)(xEnnemi+3),(uint16_t)(yEnnemi+3),ILI9341_COLOR_BLUE);
+	ILI9341_DrawFilledRectangle((uint16_t)(xEnnemi-5),(uint16_t)(yEnnemi-5),(uint16_t)(xEnnemi+3),(uint16_t)(yEnnemi+3),ILI9341_COLOR_GREEN);
 }
 
 
@@ -222,7 +237,7 @@ void affich_ennemi(uint8_t nb){
 
 		if (tabEnnemi[nb].y<20 && tabEnnemi[nb].actif == TRUE){
 
-			ILI9341_DrawFilledRectangle(tabEnnemi[nb].x-6,tabEnnemi[nb].y-4,tabEnnemi[nb].x+3,tabEnnemi[nb].y+4,ILI9341_COLOR_BLACK);
+			ILI9341_DrawFilledRectangle((uint16_t)(tabEnnemi[nb].x-6),(uint16_t)(tabEnnemi[nb].y-4),(uint16_t)(tabEnnemi[nb].x+3),(uint16_t)(tabEnnemi[nb].y+4),ILI9341_COLOR_BLACK);
 			tabEnnemi[nb].x=240;
 			tabEnnemi[nb].y=240;
 			tabEnnemi[nb].mvt=0;
@@ -256,32 +271,42 @@ bool_e collision3(uint16_t xc,uint16_t y,uint16_t r, uint8_t i){
 }
 
 bool_e Mode1Joueur(void){
+	static uint8_t score = 0;
 	ILI9341_Fill(ILI9341_COLOR_BLACK);
 	ennemi_init();
+	int8_t origine =20;
+	score=0;
 	//Systick_add_callback_function(&process_ms);
 
 	//uint16_t timer = 100;
 	static uint16_t xc;
-	ILI9341_DrawFilledRectangle(xJoueur2, yJoueur2, (uint16_t) xJoueur2+10, (uint16_t) yJoueur2+10, ILI9341_COLOR_BLACK);
+	ILI9341_DrawFilledRectangle(xJoueur2, yJoueur2, (uint16_t)(xJoueur2+10), (uint16_t)(yJoueur2+10), ILI9341_COLOR_BLACK);
 	//ILI9341_DrawSquare(xJoueur,yJoueur,5,ILI9341_COLOR_BLACK);
-
-	while(score<=20)
+	int16_t life1=3;
+	int16_t life1Before=3;
+	drawLife(life1,ILI9341_COLOR_BLUE);
+	drawLife2(life1,ILI9341_COLOR_BLUE);
+	while(score<=5)
 	{
 		if (millis >= 5)
 		{
 
 			millis = 0;
 			JOYSTICK2_move_x();
+			/*if (life1<life1Before){
+				drawLife(life1,ILI9341_COLOR_BLUE);
+				life1Before=life1;
+			}*/
 					for(uint8_t i = 0;i<=3;i++){
 						if(tabEnnemi[i].actif==TRUE){
 							affich_ennemi(i);
 							if(collision3(xc,y,10,i)){
-											ILI9341_DrawFilledRectangle(tabEnnemi[i].x-6,tabEnnemi[i].y-4,tabEnnemi[i].x+3,tabEnnemi[i].y+4,ILI9341_COLOR_BLACK);
-											ILI9341_DrawFilledCircle(xc, y+2,r+2, ILI9341_COLOR_BLACK);
+											ILI9341_DrawFilledRectangle((uint16_t)(tabEnnemi[i].x-6),(uint16_t)(tabEnnemi[i].y-4),(uint16_t)(tabEnnemi[i].x+3),(uint16_t)(tabEnnemi[i].y+4),ILI9341_COLOR_BLACK);
+											ILI9341_DrawFilledCircle(xc, y,r, ILI9341_COLOR_BLACK);
 											tir=FALSE;
 											tabEnnemi[i].actif=FALSE;
 											tabEnnemi[i+1].actif=TRUE;
-											y=20;
+											y=origine;
 											disparition ++;
 											char variable_string[5];
 											//ILI9341_Rotate(ILI9341_Orientation_Portrait_1);
@@ -289,25 +314,32 @@ bool_e Mode1Joueur(void){
 											//sprintf(variable_string, "%d", score);
 											//ILI9341_Puts(300,200, variable_string, &Font_11x18, ILI9341_COLOR_WHITE,ILI9341_COLOR_BLACK);
 										}
+							if (tabEnnemi[i].y<=20){
+								life1--;
+							}
 						}
 						if(disparition == 4){
 							disparition = 0;
 							ennemi_init();
 						}
 					}
-					if(readButton() || tir==TRUE ){
+					if(readButton2() || tir==TRUE ){
 						if(tir==FALSE){
 							xc=xJoueur2;
 							tir=TRUE;
 						}
-						shot(xc,y);
+						shot2(xc,y);
 						if(y>=310){
 							tir=FALSE;
-							ILI9341_DrawFilledCircle(xc, y+2,r+2, ILI9341_COLOR_BLACK);
-							y=20;
+							ILI9341_DrawFilledCircle(xc,y,r, ILI9341_COLOR_BLACK);
+							int8_t origine =20;
+							y=origine;
 						}
-						y+=3;
+						y+=vitesse;
 					}
+				if (life1==0){
+						return FALSE;
+				}
 		}
 	}
 	return TRUE;
@@ -506,14 +538,18 @@ bool_e collision2(uint32_t xc,uint32_t y,uint32_t r){
 	return FALSE;
 }
 
-void shot(uint16_t xc, uint16_t y){
-	ILI9341_DrawFilledCircle(xc, y+6,r, ILI9341_COLOR_BLACK);
-	ILI9341_DrawFilledCircle(xc, y-6,r, ILI9341_COLOR_RED);
+void shot(int16_t xc, int16_t y){
+	int16_t l=y+6;
+	int16_t l2=y-6;
+	ILI9341_DrawFilledCircle(xc, l,r, ILI9341_COLOR_BLACK);
+	ILI9341_DrawFilledCircle(xc, l2,r, ILI9341_COLOR_RED);
 }
 
-void shot2(uint16_t xc, uint16_t y){
-	ILI9341_DrawFilledCircle(xc, y-6,r, ILI9341_COLOR_BLACK);
-	ILI9341_DrawFilledCircle(xc, y+6,r, ILI9341_COLOR_RED);
+void shot2(int16_t xc, int16_t y){
+	int16_t l=y+6;
+	int16_t l2=y-6;
+	ILI9341_DrawFilledCircle(xc, l2,r, ILI9341_COLOR_BLACK);
+	ILI9341_DrawFilledCircle(xc, l,r, ILI9341_COLOR_RED);
 }
 
 /*
@@ -523,17 +559,17 @@ void shot2(uint16_t xc, uint16_t y){
 */
 
 bool_e Mode_2_Joueurs(void){
-	uint32_t xc;
-	uint32_t xc2;
-	uint32_t y;
+	int16_t xc;
+	int16_t xc2;
+	int16_t y;
 	y=yJoueur;
-	uint32_t y2=yJoueur2;
-	int life1=3;
-	int life2=3;
-	int life1Before=3;
-	int life2Before=3;
-	drawLife(life1,ILI9341_COLOR_BLUE);
-	drawLife2(life1,ILI9341_COLOR_RED);
+	int16_t y2=yJoueur2;
+	uint16_t life1=3;
+	uint16_t life2=3;
+	uint16_t life1Before=3;
+	uint16_t life2Before=3;
+	drawLife(life1,ILI9341_COLOR_RED);
+	drawLife2(life1,ILI9341_COLOR_BLUE);
 	while (life1!=0 && life2!= 0){
 		JOYSTICK_move_x();
 		JOYSTICK2_move_x();
@@ -545,7 +581,7 @@ bool_e Mode_2_Joueurs(void){
 			shot(xc,y);
 			if(y<=20){
 				tir=FALSE;
-				ILI9341_DrawFilledCircle(xc, y,r, ILI9341_COLOR_BLACK);
+				ILI9341_DrawFilledCircle(xc,y,r,ILI9341_COLOR_BLACK);
 				y=yJoueur;
 				}
 				if (collision(xc,y,10)){
@@ -554,10 +590,11 @@ bool_e Mode_2_Joueurs(void){
 					life2--;
 				}
 				if (life2<life2Before){
-					drawLife2(life2,ILI9341_COLOR_RED);
+					drawLife2(life2,ILI9341_COLOR_BLUE);
 					life2Before=life2;
 				}
-				y-=6;
+
+				y-=vitesse;
 			}
 			if(readButton2() || tir2==TRUE ){
 					if(tir2==FALSE){
@@ -567,7 +604,7 @@ bool_e Mode_2_Joueurs(void){
 					shot2(xc2,y2);
 					if(y2>=310){
 						tir2=FALSE;
-						ILI9341_DrawFilledCircle(xc2, y2,r, ILI9341_COLOR_BLACK);
+						ILI9341_DrawFilledCircle(xc2,y2,r,ILI9341_COLOR_BLACK);
 						y2=yJoueur2;
 					}
 					if (collision2(xc2,y2,10)){
@@ -576,10 +613,10 @@ bool_e Mode_2_Joueurs(void){
 						y2=yJoueur2;
 					}
 					if (life1<life1Before){
-						drawLife(life1,ILI9341_COLOR_BLUE);
+						drawLife(life1,ILI9341_COLOR_RED);
 						life1Before=life1;
 					}
-					y2+=6;
+					y2+=vitesse;
 				}
 	}
 	if (life1==0){
@@ -596,12 +633,12 @@ bool_e Mode_2_Joueurs(void){
  * @retval Non
 */
 
-void drawLife(int nbLife, uint16_t color){
-	for (int i=0; i<3 ; i++){
-		ILI9341_DrawFilledRectangle(230, 230-i*100, 228,  270-i*100,ILI9341_COLOR_BLACK );
+void drawLife(uint16_t nbLife, uint16_t color){
+	for (uint8_t i=0; i<3 ; i++){
+		ILI9341_DrawFilledRectangle((uint16_t)(230), (uint16_t)(230-i*100), (uint16_t)(228),  (uint16_t)(270-i*100),ILI9341_COLOR_BLACK );
 	}
-	for (int i=0; i<nbLife ; i++){
-		ILI9341_DrawFilledRectangle(230, 230-i*100, 228,  270-i*100,color);
+	for (uint8_t i=0; i<nbLife ; i++){
+		ILI9341_DrawFilledRectangle((uint16_t)(230), (uint16_t)(230-i*100), (uint16_t)(228),  (uint16_t)(270-i*100),color);
 	}
 }
 
@@ -611,12 +648,12 @@ void drawLife(int nbLife, uint16_t color){
  * @retval Non
 */
 
-void drawLife2(int nbLife, uint16_t color){
-	for (int i=0; i<3 ; i++){
-		ILI9341_DrawFilledRectangle(10, 230-i*100, 20,  270-i*100,ILI9341_COLOR_BLACK );
+void drawLife2(uint16_t nbLife, uint16_t color){
+	for (int8_t i=0; i<3 ; i++){
+		ILI9341_DrawFilledRectangle((uint16_t)(10), (uint16_t)(230-i*100), (uint16_t)(20),  (uint16_t)(270-i*100),ILI9341_COLOR_BLACK );
 	}
-	for (int i=0; i<nbLife ; i++){
-		ILI9341_DrawFilledRectangle(10, 230-i*100, 12,  270-i*100,color);
+	for (int8_t i=0; i<nbLife ; i++){
+		ILI9341_DrawFilledRectangle((uint16_t)(10), (uint16_t)(230-i*100), (uint16_t)(12),  (uint16_t)(270-i*100),color);
 	}
 }
 
@@ -713,9 +750,9 @@ void state_machine(void)
 						// 1 seul joueur
 			j1 = Mode1Joueur();
 			if(j1){
-				state = VICTOIRE;
+				state = DEFAITE;
 			}
-			state = DEFAITE;
+			state = VICTOIRE;
 
 		break;
 
